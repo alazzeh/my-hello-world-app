@@ -1,5 +1,6 @@
 import streamlit as st 
 import gspread
+import json
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 import pandas as pd
@@ -7,10 +8,13 @@ import numpy as np
 import math
 import plotly.graph_objects as go
 
+# Define scope and creds from secrets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+creds_dict = json.loads(st.secrets["GOOGLE_SERVICE_ACCOUNT_JSON"])
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 sheet = client.open("Mood_of_the_Queue").sheet1
+
 
 mood_score_map = {
     "🎉": 5,
