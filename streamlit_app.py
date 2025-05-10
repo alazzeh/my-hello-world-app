@@ -8,7 +8,7 @@ import math
 import plotly.graph_objects as go
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds = ServiceAccountCredentials.from_json_keyfile_name(r"C:\Users\moala\Desktop\mood-of-the-queue-4a0e8e148eae.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 client = gspread.authorize(creds)
 sheet = client.open("Mood_of_the_Queue").sheet1
 
